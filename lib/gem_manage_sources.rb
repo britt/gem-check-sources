@@ -1,0 +1,1 @@
+require 'commands/manage_sources_command'
