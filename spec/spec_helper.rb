@@ -4,6 +4,7 @@ require 'gem_manage_sources'
 require 'spec'
 require 'spec/autorun'
 require 'pp'
+require 'tmpdir'
 
 Spec::Runner.configure do |config|
   

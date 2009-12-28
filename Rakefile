@@ -8,14 +8,11 @@ begin
     
     gem.summary = <<-SUMMARY
 Manage your gem sources so that you can use sources that are not always available without having to 'gem sources -a' and 'gem sources -r' all the time.
-SUMMARY
-
-    gem.description = <<-DESC
-Manage your gem sources so that you can use sources that are not always available without having to 'gem sources -a' and 'gem sources -r' all the time.
-
-This is useful if you have a corporate gem server that lives within
-a firewall and is not always accessible.
-DESC    
+    SUMMARY
+    
+    gem.description = <<-WTF
+Manage your gem sources so that you can use sources that are not always available without having to 'gem sources -a' and 'gem sources -r' all the time.  This is especially useful if you have a gem server that lives within a firewall.    
+    WTF
     
     gem.email = "britt.v.crawford@gmail.com"
     gem.homepage = "http://github.com/britt/gem-manage-sources"

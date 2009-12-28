@@ -1,9 +1,9 @@
-require File.dirname(__FILE__) + '/../spec_helper'
+require File.dirname(__FILE__) + '/../../spec_helper'
 
 describe Gem::Commands::ManageSourcesCommand do
   before(:each) do
+    @test_sources_file = Dir.tmpdir + "/test_gem_sources.yml"
     @command = Gem::Commands::ManageSourcesCommand.new
-    @command.when_invoked {}
   end
   
   describe "options" do
@@ -68,5 +68,39 @@ describe Gem::Commands::ManageSourcesCommand do
         @command.options[:init?].should be_true
       end    
     end    
+  end
+
+  describe "init" do
+    context "when there is no existing sources file" do
+      before(:each) do
+        File.delete(@test_sources_file) if File.exist?(@test_sources_file)
+        Gem::Commands::ManageSourcesCommand.stub!(:sources_file).and_return(@test_sources_file)
+        File.exist?(@test_sources_file).should be_false
+        @command.invoke('-i')
+      end
+      
+      it "should create ~/.gem/ruby/sources.yml" do
+        File.exist?(@test_sources_file).should be_true
+      end
+      
+      it "should add all of the existing sources" do
+        pending
+      end
+      
+      it "should check whether or not the sources are available" do
+        pending
+      end
+      
+      it "should add unavailable sources to the inactive list" do
+        pending
+      end
+      
+      it "should add available sources to the active list" do
+        pending
+      end
+    end
+    
+    context "when there is already a sources file" do
+    end
   end
 end
