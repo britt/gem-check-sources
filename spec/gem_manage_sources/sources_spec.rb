@@ -15,7 +15,7 @@ describe Gem::Sources do
         :active => ['http://active.example.com'],
         :inactive => ['http://inactive.example.com']
       }
-      @list = Gem::Sources::List.new(@sources[:active], @sources[:inactive])
+      @list = Gem::Sources::List.new(@sources)
     end
     
     describe "##load_file" do
@@ -40,6 +40,29 @@ describe Gem::Sources do
     describe "#to_h" do
       it "should serialize to a hash" do
         @list.to_h.should == @sources
+      end
+    end
+    
+    describe "#dump" do
+      it "should dump the hash represntation to the given file" do
+        io = mock('FILE')
+        File.stub(:open).and_yield(io)
+        YAML.should_receive(:dump).once.with(@list.to_h, io)
+        @list.dump('file')
+      end
+    end
+    
+    describe "verify" do
+      it "should check all sources" do
+        @list.should_receive(:source_available?).exactly(@list.size).times.and_return(true)
+        @list.verify
+      end
+      
+      it "should sort the sources into active and inactive" do
+        @list.stub!(:source_available?).and_return(true, false)
+        @list.verify
+        @list.active.should_not be_empty
+        @list.inactive.should_not be_empty
       end
     end
   end

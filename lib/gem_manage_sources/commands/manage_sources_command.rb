@@ -39,23 +39,31 @@ module Gem
       end
       
       def initialize_sources
-        unless File.exist?(ManageSourcesCommand.sources_file)    
-          active, inactive = currently_loaded_sources.partition { |source| source_available?(source) }
-          list = List.new(active, inactive)
-          File.open(ManageSourcesCommand.sources_file, 'w+') do |sources_file|
-            YAML.dump(list.to_h, sources_file)
-          end
+        unless File.exist?(ManageSourcesCommand.sources_file)   
+          source_list = List.new(:unchecked => currently_loaded_sources)
+          source_list.verify
+          source_list.dump(ManageSourcesCommand.sources_file)
         end
       end
       
       def check_sources
-        raise NotImplementedError
+        @sources = Gem::Sources::List.load_file(ManageSourcesCommand.sources_file)
+        @sources.unchecked.concat(currently_loaded_sources)
+        @sources.verify
+        @sources.sync
+        @sources.dump(ManageSourcesCommand.sources_file)
       end
       
       def add_sources(sources)
       end
       
       def remove_sources(sources)
+      end
+      
+      private
+      
+      def sources
+        @sources ||= Gem::Sources::List.load_file(ManageSourcesCommand.sources_file)
       end
     end
   end
