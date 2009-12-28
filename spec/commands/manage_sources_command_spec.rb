@@ -46,6 +46,12 @@ describe Gem::Commands::ManageSourcesCommand do
         
         @command.options[:args].should be_empty
       end      
+      
+      it "check_sources? should be true" do
+        @command.invoke("-c")
+    
+        @command.options[:check_sources?].should be_true
+      end
     end
     
     describe "init" do  
@@ -54,7 +60,13 @@ describe Gem::Commands::ManageSourcesCommand do
         @command.invoke("--init")
         
         @command.options[:args].should be_empty
-      end      
+      end  
+      
+      it "init? should be true" do
+        @command.invoke("-i")
+        
+        @command.options[:init?].should be_true
+      end    
     end    
   end
 end
