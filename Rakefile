@@ -5,10 +5,18 @@ begin
   require 'jeweler'
   Jeweler::Tasks.new do |gem|
     gem.name = "gem-manage-sources"
-    gem.summary = %Q{Conditionally add and remove gem sources if they are available.}
-    gem.description = %Q{Conditionally add and remove gem sources if they are available.
-    This is useful if you have a corporate gem server that lives within
-    a firewall and is not always accessible.}
+    
+    gem.summary = <<-SUMMARY
+Manage your gem sources so that you can use sources that are not always available without having to 'gem sources -a' and 'gem sources -r' all the time.
+SUMMARY
+
+    gem.description = <<-DESC
+Manage your gem sources so that you can use sources that are not always available without having to 'gem sources -a' and 'gem sources -r' all the time.
+
+This is useful if you have a corporate gem server that lives within
+a firewall and is not always accessible.
+DESC    
+    
     gem.email = "britt.v.crawford@gmail.com"
     gem.homepage = "http://github.com/britt/gem-manage-sources"
     gem.authors = ["Britt Crawford"]

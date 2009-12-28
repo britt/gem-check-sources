@@ -1,6 +1,7 @@
 = gem-manage-sources
 
-Conditionally add and remove gem sources if they are available.
+Manage your gem sources so that you can use sources that are not always available without having to 'gem sources -a' and 'gem sources -r' all the time.
+
 This is useful if you have a corporate gem server that lives within
 a firewall and is not always accessible.
 
