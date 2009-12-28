@@ -4,11 +4,13 @@ require 'rake'
 begin
   require 'jeweler'
   Jeweler::Tasks.new do |gem|
-    gem.name = "gem-provisional-resources"
-    gem.summary = %Q{TODO: one-line summary of your gem}
-    gem.description = %Q{TODO: longer description of your gem}
+    gem.name = "gem-manage-sources"
+    gem.summary = %Q{Conditionally add and remove gem sources if they are available.}
+    gem.description = %Q{Conditionally add and remove gem sources if they are available.
+    This is useful if you have a corporate gem server that lives within
+    a firewall and is not always accessible.}
     gem.email = "britt.v.crawford@gmail.com"
-    gem.homepage = "http://github.com/britt/gem-provisional-resources"
+    gem.homepage = "http://github.com/britt/gem-manage-sources"
     gem.authors = ["Britt Crawford"]
     gem.add_development_dependency "rspec", ">= 1.2.9"
     gem.add_development_dependency "yard", ">= 0"

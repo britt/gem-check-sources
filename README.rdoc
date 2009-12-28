@@ -1,6 +1,8 @@
-= gem-provisional-resources
+= gem-manage-sources
 
-Description goes here.
+Conditionally add and remove gem sources if they are available.
+This is useful if you have a corporate gem server that lives within
+a firewall and is not always accessible.
 
 == Note on Patches/Pull Requests
  
