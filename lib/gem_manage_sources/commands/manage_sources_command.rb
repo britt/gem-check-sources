@@ -1,6 +1,11 @@
+require 'rubygems/command'
+require 'gem_manage_sources/sources'
+
 module Gem
   module Commands
     class ManageSourcesCommand < Gem::Command
+      include Gem::Sources
+      
       def self.sources_file
         File.join(ENV['HOME'], '.gem', 'ruby', 'sources.yml')
       end
@@ -34,9 +39,12 @@ module Gem
       end
       
       def initialize_sources
-        unless File.exist?(ManageSourcesCommand.sources_file)
-          f = File.open(ManageSourcesCommand.sources_file, 'w+')
-          f.close
+        unless File.exist?(ManageSourcesCommand.sources_file)    
+          active, inactive = currently_loaded_sources.partition { |source| source_available?(source) }
+          list = List.new(active, inactive)
+          File.open(ManageSourcesCommand.sources_file, 'w+') do |sources_file|
+            YAML.dump(list.to_h, sources_file)
+          end
         end
       end
       

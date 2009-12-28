@@ -1,6 +1,8 @@
 require File.dirname(__FILE__) + '/../../spec_helper'
 
 describe Gem::Commands::ManageSourcesCommand do
+  include Gem::Sources
+  
   before(:each) do
     @test_sources_file = Dir.tmpdir + "/test_gem_sources.yml"
     @command = Gem::Commands::ManageSourcesCommand.new
@@ -76,27 +78,34 @@ describe Gem::Commands::ManageSourcesCommand do
         File.delete(@test_sources_file) if File.exist?(@test_sources_file)
         Gem::Commands::ManageSourcesCommand.stub!(:sources_file).and_return(@test_sources_file)
         File.exist?(@test_sources_file).should be_false
+        
+        @sources = ['http://active.example.com','http://inactive.example.com']
+        @command.stub!(:currently_loaded_sources).and_return(@sources)
+        @command.stub!(:source_available?) do |source|
+          source == 'http://active.example.com'
+        end
         @command.invoke('-i')
       end
       
-      it "should create ~/.gem/ruby/sources.yml" do
+      it "should create ~/.gem/ruby/sources.yml" do        
         File.exist?(@test_sources_file).should be_true
       end
       
       it "should add all of the existing sources" do
-        pending
+        sources = Gem::Sources::List.load_file(@test_sources_file)
+        @sources.each do |source|
+          sources.all.should include(source)
+        end
       end
-      
-      it "should check whether or not the sources are available" do
-        pending
-      end
-      
+            
       it "should add unavailable sources to the inactive list" do
-        pending
+        sources = Gem::Sources::List.load_file(@test_sources_file)
+        sources.active.should == ['http://active.example.com']
       end
       
       it "should add available sources to the active list" do
-        pending
+        sources = Gem::Sources::List.load_file(@test_sources_file)
+        sources.inactive.should == ['http://inactive.example.com']
       end
     end
     
