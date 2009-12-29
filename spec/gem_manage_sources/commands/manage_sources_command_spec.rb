@@ -6,6 +6,7 @@ describe Gem::Commands::ManageSourcesCommand do
   before(:each) do
     @test_sources_file = Dir.tmpdir + "/test_gem_sources.yml"
     @command = Gem::Commands::ManageSourcesCommand.new
+    Gem::Commands::ManageSourcesCommand.stub!(:sources_file).and_return(@test_sources_file)
   end
   
   after(:each) do
@@ -79,7 +80,21 @@ describe Gem::Commands::ManageSourcesCommand do
   describe "init" do
     context "when there is no existing sources file" do
       before(:each) do
-        create_test_sources_file('http://active.example.com','http://inactive.example.com')
+        Gem::Commands::ManageSourcesCommand.stub!(:sources_file).and_return(@test_sources_file)
+        File.exist?(@test_sources_file).should be_false
+
+        @sources = ['http://active.example.com','http://inactive.example.com']
+        @list = Gem::Sources::List.new(:unchecked => @sources)
+
+        @list.stub!(:source_available?) do |source|
+          source == 'http://active.example.com'
+        end
+        
+        Gem::Sources::List.stub!(:new).and_return(@list)
+
+        @command.stub!(:currently_loaded_sources).and_return(@sources)
+        @command.stub!(:sources).and_return(@list)
+        @command.invoke('-i')
       end
       
       it "should create ~/.gem/ruby/sources.yml" do        
@@ -107,8 +122,19 @@ describe Gem::Commands::ManageSourcesCommand do
 
   describe "check" do
     before(:each) do
-      create_test_sources_file('http://active.example.com','http://inactive.example.com')
+      @sources = ['http://active.example.com','http://inactive.example.com']
+      @list = Gem::Sources::List.new(:unchecked => @sources)
+
+      @list.stub!(:source_available?) do |source|
+        source == 'http://active.example.com'
+      end
+      @list.verify
+      @list.dump(@test_sources_file)
+      
       @sources << 'http://another.example.com'
+      @command.stub!(:currently_loaded_sources).and_return(@sources)
+      @command.stub!(:sources).and_return(@list)
+      
       @command.invoke('-c')
       @list = Gem::Sources::List.load_file(@test_sources_file)    
     end
@@ -118,23 +144,11 @@ describe Gem::Commands::ManageSourcesCommand do
     end
     
     it "should add unavailable sources to the inactive list" do 
-      @list.inactive.should.sort.should == ['http://inactive.example.com', 'http://another.example.com'].sort
+      @list.inactive.sort.should == ['http://inactive.example.com', 'http://another.example.com'].sort
     end
     
     it "should add available sources to the active list" do
       @list.active.should == ['http://active.example.com']
     end
-  end
-  
-  def create_test_sources_file(*sources)
-    Gem::Commands::ManageSourcesCommand.stub!(:sources_file).and_return(@test_sources_file)
-    File.exist?(@test_sources_file).should be_false
-            
-    @sources = sources
-    @command.stub!(:currently_loaded_sources).and_return(@sources)
-    @command.stub!(:source_available?) do |source|
-      source == 'http://active.example.com'
-    end
-    @command.invoke('-i')
   end
 end

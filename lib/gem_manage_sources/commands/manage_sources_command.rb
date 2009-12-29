@@ -40,18 +40,17 @@ module Gem
       
       def initialize_sources
         unless File.exist?(ManageSourcesCommand.sources_file)   
-          source_list = List.new(:unchecked => currently_loaded_sources)
-          source_list.verify
-          source_list.dump(ManageSourcesCommand.sources_file)
+          @sources = List.new(:unchecked => currently_loaded_sources)
+          @sources.verify
+          @sources.dump(ManageSourcesCommand.sources_file)
         end
       end
       
       def check_sources
-        @sources = Gem::Sources::List.load_file(ManageSourcesCommand.sources_file)
-        @sources.unchecked.concat(currently_loaded_sources)
-        @sources.verify
-        @sources.sync
-        @sources.dump(ManageSourcesCommand.sources_file)
+        sources.unchecked.concat(currently_loaded_sources)
+        sources.verify
+        sources.sync
+        sources.dump(ManageSourcesCommand.sources_file)
       end
       
       def add_sources(sources)
