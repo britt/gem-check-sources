@@ -124,7 +124,8 @@ describe Gem::Commands::ManageSourcesCommand do
     before(:each) do
       @sources = ['http://active.example.com','http://inactive.example.com']
       @list = Gem::Sources::List.new(:unchecked => @sources)
-
+      
+      @list.stub!(:sync)
       @list.stub!(:source_available?) do |source|
         source == 'http://active.example.com'
       end

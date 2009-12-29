@@ -28,8 +28,20 @@ module Gem
     
       def sync
         current_sources = currently_loaded_sources
-        (active - current_sources).each { |source| add_source(source) }
-        (inactive & current_sources).each { |source| remove_source(source) }
+        (active - current_sources).each { |source| add_system_source(source) }
+        (inactive & current_sources).each { |source| remove_system_source(source) }
+      end
+    
+      def add(source)
+        if source_available?(source)
+          self.active << source
+        else
+          self.inactive << source
+        end
+      end
+      
+      def remove(source)
+        [@active, @unchecked, @inactive].each { |list| list.delete(source) }
       end
     
       def all
@@ -62,11 +74,11 @@ module Gem
         response.is_a?(Net::HTTPOK)
       end
       
-      def add_source(source)
+      def add_system_source(source)
         system("gem source -a #{source}")
       end
 
-      def remove_source(source)
+      def remove_system_source(source)
         system("gem source -r #{source}")
       end
     end

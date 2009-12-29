@@ -66,20 +66,36 @@ describe Gem::Sources do
       end
     end
     
+    describe "#add" do
+      it "should check if the source is available it to the appropriate list" do
+        @list.stub!(:source_available?).and_return(false)
+        @list.add('http://yas.example.com')
+        @list.inactive.should include('http://yas.example.com')
+        @list.active.should_not include('http://yas.example.com')
+      end
+    end
+    
+    describe "#remove" do
+      it "should remove the source from all lists" do
+        @list.remove('http://active.example.com')
+        @list.all.should_not include('http://active.example.com')
+      end
+    end
+    
     describe "#sync" do
       before(:each) do
         @list.stub!(:currently_loaded_sources).and_return(['http://inactive.example.com'])
       end
       
       it "should add all active sources that are not currently loaded" do
-        @list.should_receive(:add_source).once.with('http://active.example.com')
-        @list.stub!(:remove_source)
+        @list.should_receive(:add_system_source).once.with('http://active.example.com')
+        @list.stub!(:remove_system_source)
         @list.sync
       end
       
       it "should remove any inactive sources that are currently loaded" do
-        @list.should_receive(:remove_source).once.with('http://inactive.example.com')
-        @list.stub!(:add_source)
+        @list.should_receive(:remove_system_source).once.with('http://inactive.example.com')
+        @list.stub!(:add_system_source)
         @list.sync
       end
     end
