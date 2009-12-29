@@ -53,10 +53,12 @@ module Gem
         sources.dump(ManageSourcesCommand.sources_file)
       end
       
-      def add_sources(sources)
+      def add_sources(sources_to_add)
+        sources_to_add.each { |source| sources.add(source) }
       end
       
-      def remove_sources(sources)
+      def remove_sources(sources_to_remove)
+        sources_to_remove.each { |source| sources.remove(source) }
       end
       
       private
