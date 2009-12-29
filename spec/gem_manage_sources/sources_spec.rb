@@ -44,7 +44,7 @@ describe Gem::Sources do
     end
     
     describe "#dump" do
-      it "should dump the hash represntation to the given file" do
+      it "should dump the hash representation to the given file" do
         io = mock('FILE')
         File.stub(:open).and_yield(io)
         YAML.should_receive(:dump).once.with(@list.to_h, io)
@@ -52,7 +52,7 @@ describe Gem::Sources do
       end
     end
     
-    describe "verify" do
+    describe "#verify" do
       it "should check all sources" do
         @list.should_receive(:source_available?).exactly(@list.size).times.and_return(true)
         @list.verify
@@ -63,6 +63,24 @@ describe Gem::Sources do
         @list.verify
         @list.active.should_not be_empty
         @list.inactive.should_not be_empty
+      end
+    end
+    
+    describe "#sync" do
+      before(:each) do
+        @list.stub!(:currently_loaded_sources).and_return(['http://inactive.example.com'])
+      end
+      
+      it "should add all active sources that are not currently loaded" do
+        @list.should_receive(:add_source).once.with('http://active.example.com')
+        @list.stub!(:remove_source)
+        @list.sync
+      end
+      
+      it "should remove any inactive sources that are currently loaded" do
+        @list.should_receive(:remove_source).once.with('http://inactive.example.com')
+        @list.stub!(:add_source)
+        @list.sync
       end
     end
   end

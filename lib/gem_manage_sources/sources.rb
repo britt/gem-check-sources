@@ -7,7 +7,9 @@ module Gem
       `gem sources`.split("\n").select { |s| s.start_with?('http') }
     end
     
-    class List      
+    class List    
+      include Gem::Sources
+        
       attr_accessor :active, :inactive, :unchecked
     
       def self.load_file(file_name)
@@ -25,6 +27,9 @@ module Gem
       end
     
       def sync
+        current_sources = currently_loaded_sources
+        (active - current_sources).each { |source| add_source(source) }
+        (inactive & current_sources).each { |source| remove_source(source) }
       end
     
       def all
