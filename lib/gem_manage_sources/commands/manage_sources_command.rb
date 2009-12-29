@@ -54,7 +54,7 @@ module Gem
         list
       end
       
-      def check_sources
+      def check_sources        
         sources.unchecked.concat(currently_loaded_sources)
         sources.verify
         sources.sync
@@ -65,9 +65,9 @@ module Gem
       def add_sources(sources_to_add)
         sources_to_add.each do |source| 
           if sources.add(source) 
-            puts "Added #{source} to gem sources."
+            say "Added #{source} to gem sources."
           else
-            puts "** #{source} Unavailable ** Added to the list of inactive sources. "
+            say "** #{source} Unavailable ** Added to the list of inactive sources. "
           end
         end
         sources.dump(ManageSourcesCommand.sources_file)
@@ -76,27 +76,31 @@ module Gem
       def remove_sources(sources_to_remove)
         sources_to_remove.each do |source| 
           sources.remove(source)
-          puts "Removed #{source} from gem sources."
+          say "Removed #{source} from gem sources."
         end
         sources.dump(ManageSourcesCommand.sources_file)
       end
       
       def list
-        puts "*** CURRENT SOURCES ***"
-        puts ""
-        puts "** ACTIVE SOURCES **"
-        puts ""
-        sources.active.each { |source| puts source }
-        puts ""
-        puts "** INACTIVE SOURCES **"
-        puts ""
-        sources.inactive.each { |source| puts source }
+        say "*** CURRENT SOURCES ***"
+        say ""
+        say "** ACTIVE SOURCES **"
+        say ""
+        sources.active.each { |source| say source }
+        say ""
+        say "** INACTIVE SOURCES **"
+        say ""
+        sources.inactive.each { |source| say source }
       end
       
       private
       
       def sources
         @sources ||= Gem::Sources::List.load_file(ManageSourcesCommand.sources_file)
+      end
+      
+      def say(message)
+        super(message) unless ENV['QUIET']
       end
     end
   end

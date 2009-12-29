@@ -4,7 +4,7 @@ require 'net/http'
 module Gem
   module Sources
     def currently_loaded_sources
-      `gem sources`.split("\n").select { |s| s.start_with?('http') }
+      `gem sources`.split("\n").select { |s| /http/ =~ s }
     end
     
     class List    

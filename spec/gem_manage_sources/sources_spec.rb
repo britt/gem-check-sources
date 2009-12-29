@@ -5,7 +5,7 @@ describe Gem::Sources do
   
   describe "#currently_loaded_sources" do
     it "should load all of the sources from 'gem sources'" do
-      currently_loaded_sources.should == `gem sources`.split("\n").select { |s| s.start_with?('http') }
+      currently_loaded_sources.should == `gem sources`.split("\n").select { |s| /http/ =~ s }
     end
   end
     
