@@ -33,11 +33,13 @@ module Gem
       end
     
       def add(source)
-        if source_available?(source)
+        available = source_available?(source)
+        if available
           self.active << source
         else
           self.inactive << source
         end
+        available
       end
       
       def remove(source)

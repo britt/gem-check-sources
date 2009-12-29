@@ -51,6 +51,7 @@ module Gem
           @sources.verify
           @sources.dump(ManageSourcesCommand.sources_file)
         end
+        list
       end
       
       def check_sources
@@ -58,14 +59,24 @@ module Gem
         sources.verify
         sources.sync
         sources.dump(ManageSourcesCommand.sources_file)
+        list
       end
       
       def add_sources(sources_to_add)
-        sources_to_add.each { |source| sources.add(source) }
+        sources_to_add.each do |source| 
+          if sources.add(source) 
+            puts "Added #{source} to gem sources."
+          else
+            puts "** #{source} Unavailable ** Added to the list of inactive sources. "
+          end
+        end
       end
       
       def remove_sources(sources_to_remove)
-        sources_to_remove.each { |source| sources.remove(source) }
+        sources_to_remove.each do |source| 
+          sources.remove(source)
+          puts "Removed #{source} from gem sources."
+        end
       end
       
       def list
