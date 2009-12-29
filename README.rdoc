@@ -27,6 +27,11 @@ To remove a source
 
   gem manage_sources --remove http://source.com
 
+== Links
+
+* Bugtracker: http://github.com/britt/gem-manage-sources/issues
+* Code Metrics: http://bit.ly/6CJtPx
+
 == TODO
 
 * Documentation
