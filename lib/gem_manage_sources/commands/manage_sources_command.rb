@@ -70,6 +70,7 @@ module Gem
             puts "** #{source} Unavailable ** Added to the list of inactive sources. "
           end
         end
+        sources.dump(ManageSourcesCommand.sources_file)
       end
       
       def remove_sources(sources_to_remove)
@@ -77,6 +78,7 @@ module Gem
           sources.remove(source)
           puts "Removed #{source} from gem sources."
         end
+        sources.dump(ManageSourcesCommand.sources_file)
       end
       
       def list
