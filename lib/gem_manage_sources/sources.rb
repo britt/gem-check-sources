@@ -68,7 +68,7 @@ module Gem
       
       def source_available?(host)
         uri = URI.parse(host)
-        gemspec_path = uri.path[-1,1] == '/' ? "gems/latest_specs.4.8.gz" : "/gems/latest_specs.4.8.gz"
+        gemspec_path = uri.path[-1,1] == '/' ? "specs.4.8.gz" : "/specs.4.8.gz"
         response = nil
         Net::HTTP.start(uri.host, uri.port) {|http|
           response = http.head(gemspec_path)

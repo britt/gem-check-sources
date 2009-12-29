@@ -5,6 +5,34 @@ Manage your gem sources so that you can use sources that are not always availabl
 This is useful if you have a corporate gem server that lives within
 a firewall and is not always accessible.
 
+== Installation
+
+  gem install gem-manage-sources
+
+== Usage
+
+First you have to create a sources.yml file using:
+
+  gem manage_sources --init
+
+Now whenever you switch networks or want to check whether some of your sources are available use:
+
+  gem manage_sources --check
+
+To add a source:
+
+  gem manage_sources --add http://source.com
+
+To remove a source
+
+  gem manage_sources --remove http://source.com
+
+== TODO
+
+* Documentation
+* JRuby (and *Ruby) support
+* Find a better name
+
 == Note on Patches/Pull Requests
  
 * Fork the project.
