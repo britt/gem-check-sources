@@ -69,11 +69,11 @@ module Gem
       def source_available?(host)        
         uri = URI.parse(host)
         gemspec_path = uri.path[-1,1] == '/' ? "specs.4.8.gz" : "/specs.4.8.gz"
-        response = nil
-        Net::HTTP.start(uri.host, uri.port) {|http|
-          response = http.head(uri.path + gemspec_path)
-        }
+        response = nil  
+        Net::HTTP.start(uri.host, uri.port) {|http| response = http.head(uri.path + gemspec_path)}
         response.is_a?(Net::HTTPOK)
+      rescue
+        false
       end
       
       def add_system_source(source)
