@@ -29,7 +29,6 @@ To remove a source
 
 == TODO
 
-* Sources are not being removed when they go active...doh.
 * Documentation
 * JRuby (and *Ruby) support
 * Find a better name
