@@ -32,10 +32,17 @@ module Gem
       end
       
       def execute
-        initialize_sources if options[:init?]
-        check_sources if options[:check_sources?]
-        add_sources(options[:sources_to_add])
-        remove_sources(options[:sources_to_remove])
+        if options[:init?]
+          initialize_sources 
+        elsif options[:check_sources?]
+          check_sources
+        elsif !options[:sources_to_add].empty?
+          add_sources(options[:sources_to_add])
+        elsif !options[:sources_to_remove].empty?
+          remove_sources(options[:sources_to_remove])
+        else
+          list
+        end
       end
       
       def initialize_sources
@@ -59,6 +66,18 @@ module Gem
       
       def remove_sources(sources_to_remove)
         sources_to_remove.each { |source| sources.remove(source) }
+      end
+      
+      def list
+        puts "*** CURRENT SOURCES ***"
+        puts ""
+        puts "** ACTIVE SOURCES **"
+        puts ""
+        sources.active.each { |source| puts source }
+        puts ""
+        puts "** INACTIVE SOURCES **"
+        puts ""
+        sources.inactive.each { |source| puts source }
       end
       
       private
