@@ -7,11 +7,16 @@ begin
     gem.name = "gem-manage-sources"
     
     gem.summary = <<-SUMMARY
-Manage your gem sources so that you can use sources that are not always available without having to 'gem sources -a' and 'gem sources -r' all the time.
+A replacement for the 'gem sources' command that allows you to easily use sources that may not always be available (e.g. inside a firewall).
     SUMMARY
     
     gem.description = <<-WTF
-Manage your gem sources so that you can use sources that are not always available without having to 'gem sources -a' and 'gem sources -r' all the time.  This is especially useful if you have a gem server that lives within a firewall.    
+gem-manage-sources is a replacement for the 'gem sources' command that allows you to easily use sources that may not always be available.
+
+Imagine you work at a company that hosts its own gem server within the corporate network.  At work you need to install and update gems hosted on the corporate
+server, but when you take your laptop home and try to work on some side projects (that don't use the company gems) all your remote gem commands fail.  So, you end up typing 'gem sources -a' and 'gem sources -r' a lot.
+
+gem-manage-sources solves this problem by maintaining two list of gem servers (active and inactive) and checking whether or not gem servers are available.  If a server is unavailable it gets put on the inactive list and removed form your gem sources.  When it becomes availabl again it gets re-added to your list of gem sources.    
     WTF
     
     gem.email = "britt.v.crawford@gmail.com"

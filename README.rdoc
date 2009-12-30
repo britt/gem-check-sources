@@ -1,9 +1,11 @@
 = gem-manage-sources
 
-Manage your gem sources so that you can use sources that are not always available without having to 'gem sources -a' and 'gem sources -r' all the time.
+gem-manage-sources is a replacement for the 'gem sources' command that allows you to easily use sources that may not always be available.
 
-This is useful if you have a corporate gem server that lives within
-a firewall and is not always accessible.
+Imagine you work at a company that hosts its own gem server within the corporate network.  At work you need to install and update gems hosted on the corporate
+server, but when you take your laptop home and try to work on some side projects (that don't use the company gems) all your remote gem commands fail.  So, you end up typing 'gem sources -a' and 'gem sources -r' a lot.
+
+gem-manage-sources solves this problem by maintaining two list of gem servers (active and inactive) and checking whether or not gem servers are available.  If a server is unavailable it gets put on the inactive list and removed form your gem sources.  When it becomes availabl again it gets re-added to your list of gem sources.
 
 == Installation
 
@@ -11,7 +13,7 @@ a firewall and is not always accessible.
 
 == Usage
 
-First you have to create a sources.yml file using:
+Before you use gem-manage-sources you need to initialize the lists of gem sources using:
 
   gem manage_sources --init
 
@@ -19,13 +21,21 @@ Now whenever you switch networks or want to check whether some of your sources a
 
   gem manage_sources --check
 
-To add a source:
+gem-manage-sources is effectively a replacement for
+  
+  gem sources
 
-  gem manage_sources --add http://source.com
+In order to keep your gem sources in sync you should always use 
+  
+  gem manage_sources --add
+  gem manage_sources --remove
 
-To remove a source
+in place of
 
-  gem manage_sources --remove http://source.com
+  gem sources -a
+  gem sources -r
+
+I consider monkey-patching all of this functionality into the existing sources command, but that seemed really intrusive, especially before the whole idea has proven out.
 
 == Links
 
@@ -34,7 +44,6 @@ To remove a source
 
 == TODO
 
-* Documentation
 * JRuby (and *Ruby) support
 * Find a better name
 
