@@ -12,7 +12,7 @@ module Gem
       
       def initialize
         super('manage_sources', 'Manage the sources RubyGems use to search for gems. (USE INSTEAD OF: sources)')
-        defaults.merge!(:sources_to_add => [], :sources_to_remove => [], :check_sources? => false, :init? => false)
+        defaults.merge!(:sources_to_add => [], :sources_to_remove => [], :check_sources? => false, :init? => false, :verbose? => false)
         
         add_option('-a', '--add SOURCE_URL', 'Add a gem source') do |value, options|
           options[:sources_to_add] << value
