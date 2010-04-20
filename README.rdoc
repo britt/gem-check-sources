@@ -1,11 +1,15 @@
-= gem-manage-sources
+= gem-check-sources
 
-gem-manage-sources is a replacement for the 'gem sources' command that allows you to easily use sources that may not always be available.
+gem-check-sources keeps your local list of gem sources in sync and removes any gem servers that might be unavailable.
+
+== Why?
 
 Imagine you work at a company that hosts its own gem server within the corporate network.  At work you need to install and update gems hosted on the corporate
-server, but when you take your laptop home and try to work on some side projects (that don't use the company gems) all your remote gem commands fail.  So, you end up typing 'gem sources -a' and 'gem sources -r' a lot.
+server, but when you take your laptop home and try to work on a side project all your remote gem commands fail.  
 
-gem-manage-sources solves this problem by maintaining two list of gem servers (active and inactive) and checking whether or not gem servers are available.  If a server is unavailable it gets put on the inactive list and removed form your gem sources.  When it becomes availabl again it gets re-added to your list of gem sources.
+So, you end up typing 'gem sources -a' and 'gem sources -r' a lot.
+
+gem-check-sources solves this problem by maintaining two list of gem servers (active and inactive).  If a server is unavailable it gets put on the inactive list and removed from your gem sources.  It will get added back when it becomes available again.
 
 == Installation
 
@@ -13,39 +17,14 @@ gem-manage-sources solves this problem by maintaining two list of gem servers (a
 
 == Usage
 
-Before you use gem-manage-sources you need to initialize the lists of gem sources using:
+  gem check_sources
 
-  gem manage_sources --init
-
-Now whenever you switch networks or want to check whether some of your sources are available use:
-
-  gem manage_sources --check
-
-gem-manage-sources is effectively a replacement for
-  
-  gem sources
-
-In order to keep your gem sources in sync you should always use 
-  
-  gem manage_sources --add
-  gem manage_sources --remove
-
-in place of
-
-  gem sources -a
-  gem sources -r
-
-I consider monkey-patching all of this functionality into the existing sources command, but that seemed really intrusive, especially before the whole idea has proven out.
+That's it.  If something is inactive and you want to add it back just run the command again.
 
 == Links
 
-* Bugtracker: http://github.com/britt/gem-manage-sources/issues
+* Issue tracking: http://github.com/britt/gem-manage-sources/issues
 * Code Metrics: http://bit.ly/6CJtPx
-
-== TODO
-
-* JRuby (and *Ruby) support
-* Find a better name
 
 == Note on Patches/Pull Requests
  
