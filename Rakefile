@@ -15,7 +15,7 @@ gem-check-sources keeps your local list of gem sources in sync and removes any g
     WTF
     
     gem.email = "britt.v.crawford@gmail.com"
-    gem.homepage = "http://github.com/britt/gem-manage-sources"
+    gem.homepage = "http://github.com/britt/gem-check-sources"
     gem.authors = ["Britt Crawford"]
     gem.add_development_dependency "rspec", ">= 1.2.9"
     gem.add_development_dependency "yard", ">= 0"

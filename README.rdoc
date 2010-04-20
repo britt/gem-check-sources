@@ -23,8 +23,8 @@ That's it.  If something is inactive and you want to add it back just run the co
 
 == Links
 
-* Issue tracking: http://github.com/britt/gem-manage-sources/issues
-* Code Metrics: http://getcaliper.com/caliper/project?repo=git://github.com/britt/gem-manage-sources.git
+* Issue tracking: http://github.com/britt/gem-check-sources/issues
+* Code Metrics: http://getcaliper.com/caliper/project?repo=git://github.com/britt/gem-check-sources.git
 
 == Note on Patches/Pull Requests
  
