@@ -5,7 +5,7 @@
 
 Gem::Specification.new do |s|
   s.name = %q{check-gem-sources}
-  s.version = "0.2.6"
+  s.version = "1.0.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Britt Crawford"]
@@ -24,11 +24,12 @@ Gem::Specification.new do |s|
      "README.rdoc",
      "Rakefile",
      "VERSION",
+     "check-gem-sources.gemspec",
      "lib/gem_check_sources.rb",
-     "lib/gem_check_sources/commands/manage_sources_command.rb",
+     "lib/gem_check_sources/commands/check_sources_command.rb",
      "lib/gem_check_sources/sources.rb",
      "lib/rubygems_plugin.rb",
-     "spec/gem_check_sources/commands/manage_sources_command_spec.rb",
+     "spec/gem_check_sources/commands/check_sources_command_spec.rb",
      "spec/gem_check_sources/sources_spec.rb",
      "spec/spec.opts",
      "spec/spec_helper.rb"
@@ -39,7 +40,7 @@ Gem::Specification.new do |s|
   s.rubygems_version = %q{1.3.6}
   s.summary = %q{gem-check-sources keeps your local list of gem sources in sync and removes any gem servers that might be unavailable.}
   s.test_files = [
-    "spec/gem_check_sources/commands/manage_sources_command_spec.rb",
+    "spec/gem_check_sources/commands/check_sources_command_spec.rb",
      "spec/gem_check_sources/sources_spec.rb",
      "spec/spec_helper.rb"
   ]

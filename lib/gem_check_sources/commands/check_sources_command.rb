@@ -1,5 +1,5 @@
 require 'rubygems/command'
-require 'gem_manage_sources/sources'
+require 'gem_check_sources/sources'
 
 module Gem
   module Commands
