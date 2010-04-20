@@ -4,7 +4,7 @@ require 'rake'
 begin
   require 'jeweler'
   Jeweler::Tasks.new do |gem|
-    gem.name = "check-gem-sources"
+    gem.name = "gem-check-sources"
     
     gem.summary = <<-SUMMARY
 gem-check-sources keeps your local list of gem sources in sync and removes any gem servers that might be unavailable.    
