@@ -3,7 +3,7 @@ require 'gem_manage_sources/sources'
 
 module Gem
   module Commands
-    class ManageSourcesCommand < Gem::Command
+    class CheckSourcesCommand < Gem::Command
       include Gem::Sources
       
       def self.sources_file

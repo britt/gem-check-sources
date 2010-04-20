@@ -24,12 +24,12 @@ Gem::Specification.new do |s|
      "README.rdoc",
      "Rakefile",
      "VERSION",
-     "lib/gem_manage_sources.rb",
-     "lib/gem_manage_sources/commands/manage_sources_command.rb",
-     "lib/gem_manage_sources/sources.rb",
+     "lib/gem_check_sources.rb",
+     "lib/gem_check_sources/commands/manage_sources_command.rb",
+     "lib/gem_check_sources/sources.rb",
      "lib/rubygems_plugin.rb",
-     "spec/gem_manage_sources/commands/manage_sources_command_spec.rb",
-     "spec/gem_manage_sources/sources_spec.rb",
+     "spec/gem_check_sources/commands/manage_sources_command_spec.rb",
+     "spec/gem_check_sources/sources_spec.rb",
      "spec/spec.opts",
      "spec/spec_helper.rb"
   ]
@@ -39,8 +39,8 @@ Gem::Specification.new do |s|
   s.rubygems_version = %q{1.3.6}
   s.summary = %q{gem-check-sources keeps your local list of gem sources in sync and removes any gem servers that might be unavailable.}
   s.test_files = [
-    "spec/gem_manage_sources/commands/manage_sources_command_spec.rb",
-     "spec/gem_manage_sources/sources_spec.rb",
+    "spec/gem_check_sources/commands/manage_sources_command_spec.rb",
+     "spec/gem_check_sources/sources_spec.rb",
      "spec/spec_helper.rb"
   ]
 

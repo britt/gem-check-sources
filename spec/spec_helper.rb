@@ -1,6 +1,6 @@
 $LOAD_PATH.unshift(File.dirname(__FILE__))
 $LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '..', 'lib'))
-require 'gem_manage_sources'
+require 'gem_check_sources'
 require 'spec'
 require 'spec/autorun'
 require 'pp'

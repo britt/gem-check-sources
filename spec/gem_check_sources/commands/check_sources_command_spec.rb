@@ -1,11 +1,11 @@
 require File.dirname(__FILE__) + '/../../spec_helper'
 
-describe Gem::Commands::ManageSourcesCommand do
+describe Gem::Commands::CheckSourcesCommand do
   include Gem::Sources
   
   before(:each) do
     @test_sources_file = Dir.tmpdir + "/test_gem_sources.yml"
-    @command = Gem::Commands::ManageSourcesCommand.new
+    @command = Gem::Commands::CheckSourcesCommand.new
     Gem::Commands::ManageSourcesCommand.stub!(:sources_file).and_return(@test_sources_file)
   end
   
@@ -80,7 +80,7 @@ describe Gem::Commands::ManageSourcesCommand do
   describe "init" do
     context "when there is no existing sources file" do
       before(:each) do
-        Gem::Commands::ManageSourcesCommand.stub!(:sources_file).and_return(@test_sources_file)
+        Gem::Commands::CheckSourcesCommand.stub!(:sources_file).and_return(@test_sources_file)
         File.exist?(@test_sources_file).should be_false
 
         @sources = ['http://active.example.com','http://inactive.example.com']
