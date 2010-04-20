@@ -4,6 +4,7 @@ describe Gem::Commands::CheckSourcesCommand do
   include Gem::Sources
   
   before(:each) do
+    $stdout = StringIO.new
     # Dump the sources file in a temp dir so its easy to clean up.
     @test_sources_file = Dir.tmpdir + "/test_gem_sources.yml"
     Gem::Commands::CheckSourcesCommand.stub!(:sources_file).and_return(@test_sources_file)
@@ -67,7 +68,7 @@ describe Gem::Commands::CheckSourcesCommand do
       it "should synchronize the system source list with the available sources" do
         @list.should_receive(:sync).once
         @command.invoke
-      end
+      end      
     end
     
     context "when the sources file already exists" do    
@@ -116,7 +117,7 @@ describe Gem::Commands::CheckSourcesCommand do
       it "should synchronize the system source list with the available sources" do
         @initial_list.should_receive(:sync).once
         @command.invoke
-      end
+      end      
     end
   end
 end

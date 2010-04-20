@@ -21,6 +21,7 @@ module Gem
         else
           initialize_sources
         end
+        list
       end
       
       def initialize_sources
@@ -38,25 +39,21 @@ module Gem
       end
       
       def list
-        say "*** CURRENT SOURCES ***"
-        say ""
-        say "** ACTIVE SOURCES **"
-        say ""
-        sources.active.each { |source| say source }
-        say ""
-        say "** INACTIVE SOURCES **"
-        say ""
-        sources.inactive.each { |source| say source }
+        puts "*** CURRENT SOURCES ***"
+        puts ""
+        puts "** ACTIVE SOURCES **"
+        puts ""
+        sources.active.each { |source| puts source }
+        puts ""
+        puts "** INACTIVE SOURCES **"
+        puts ""
+        sources.inactive.each { |source| puts source }
       end
       
       private
       
       def sources
         @sources ||= Gem::Sources::List.load_file(ManageSourcesCommand.sources_file)
-      end
-      
-      def say(message)
-        super(message) unless ENV['QUIET']
       end
     end
   end
