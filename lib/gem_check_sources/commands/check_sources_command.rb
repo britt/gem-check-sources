@@ -16,53 +16,25 @@ module Gem
       end
       
       def execute
-        if options[:init?]
-          initialize_sources 
-        elsif options[:check_sources?]
+        if File.exist?(CheckSourcesCommand.sources_file)  
           check_sources
-        elsif !options[:sources_to_add].empty?
-          add_sources(options[:sources_to_add])
-        elsif !options[:sources_to_remove].empty?
-          remove_sources(options[:sources_to_remove])
         else
-          list
+          initialize_sources
         end
       end
       
       def initialize_sources
-        unless File.exist?(ManageSourcesCommand.sources_file)   
-          @sources = List.new(:unchecked => currently_loaded_sources)
-          @sources.verify
-          @sources.dump(ManageSourcesCommand.sources_file)
-        end
-        list
+        @sources = List.new(:unchecked => currently_loaded_sources)
+        @sources.verify
+        @sources.sync
+        @sources.dump(CheckSourcesCommand.sources_file)
       end
       
       def check_sources        
         sources.unchecked.concat(currently_loaded_sources)
         sources.verify
         sources.sync
-        sources.dump(ManageSourcesCommand.sources_file)
-        list
-      end
-      
-      def add_sources(sources_to_add)
-        sources_to_add.each do |source| 
-          if sources.add(source) 
-            say "Added #{source} to gem sources."
-          else
-            say "** #{source} Unavailable ** Added to the list of inactive sources. "
-          end
-        end
-        sources.dump(ManageSourcesCommand.sources_file)
-      end
-      
-      def remove_sources(sources_to_remove)
-        sources_to_remove.each do |source| 
-          sources.remove(source)
-          say "Removed #{source} from gem sources."
-        end
-        sources.dump(ManageSourcesCommand.sources_file)
+        sources.dump(CheckSourcesCommand.sources_file)
       end
       
       def list
