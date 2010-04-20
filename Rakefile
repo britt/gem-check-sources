@@ -4,14 +4,14 @@ require 'rake'
 begin
   require 'jeweler'
   Jeweler::Tasks.new do |gem|
-    gem.name = "gem-manage-sources"
+    gem.name = "check-gem-sources"
     
     gem.summary = <<-SUMMARY
-A replacement for the 'gem sources' command that allows you to easily use sources that may not always be available (e.g. inside a firewall).
-    SUMMARY
+gem-check-sources keeps your local list of gem sources in sync and removes any gem servers that might be unavailable.    
+SUMMARY
     
     gem.description = <<-WTF
-gem-manage-sources is a replacement for the 'gem sources' command that allows you to easily use sources that may not always be available.
+gem-check-sources keeps your local list of gem sources in sync and removes any gem servers that might be unavailable.
     WTF
     
     gem.email = "britt.v.crawford@gmail.com"
