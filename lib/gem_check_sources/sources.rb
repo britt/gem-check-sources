@@ -71,7 +71,7 @@ module Gem
         gemspec_path = uri.path[-1,1] == '/' ? "specs.4.8.gz" : "/specs.4.8.gz"
         response = nil  
         Net::HTTP.start(uri.host, uri.port) {|http| response = http.head(uri.path + gemspec_path)}
-        response.is_a?(Net::HTTPOK) || response.is_a?(Net::HTTPFound)
+        response.is_a?(Net::HTTPOK) || response.is_a?(Net::HTTPFound) || response.is_a?(Net::HTTPNotModified)
       rescue
         false
       end
