@@ -13,7 +13,7 @@ gem-check-sources solves this problem by maintaining two list of gem servers (ac
 
 == Installation
 
-  gem install gem-manage-sources
+  gem install gem-check-sources
 
 == Usage
 

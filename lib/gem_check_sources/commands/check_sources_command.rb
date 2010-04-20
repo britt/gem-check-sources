@@ -52,7 +52,7 @@ module Gem
       private
       
       def sources
-        @sources ||= Gem::Sources::List.load_file(ManageSourcesCommand.sources_file)
+        @sources ||= Gem::Sources::List.load_file(CheckSourcesCommand.sources_file)
       end
     end
   end
