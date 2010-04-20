@@ -24,7 +24,7 @@ Gem::Specification.new do |s|
      "README.rdoc",
      "Rakefile",
      "VERSION",
-     "check-gem-sources.gemspec",
+     "gem-check-sources.gemspec",
      "lib/gem_check_sources.rb",
      "lib/gem_check_sources/commands/check_sources_command.rb",
      "lib/gem_check_sources/sources.rb",
