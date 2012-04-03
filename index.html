@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="description" content="Gem-check-sources : Keeps your local list of gem sources in sync and removes any gem servers that might be unavailable. " />
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>Gem-check-sources</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/britt/gem-check-sources">Fork Me on GitHub</a>
+
+          <h1 id="project_title">Gem-check-sources</h1>
+          <h2 id="project_tagline">Keeps your local list of gem sources in sync and removes any gem servers that might be unavailable. </h2>
+
+          <section id="downloads">
+            <a class="zip_download_link" href="https://github.com/britt/gem-check-sources/zipball/master">Download this project as a .zip file</a>
+            <a class="tar_download_link" href="https://github.com/britt/gem-check-sources/tarball/master">Download this project as a tar.gz file</a>
+          </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <h2>gem-check-sources</h2>
+
+<p><strong>gem-check-sources</strong> keeps your local list of gem sources in sync and removes any gem servers that might be unavailable.</p>
+
+<h3>Why?</h3>
+
+<p>Imagine you work at a company that hosts its own gem server within the corporate network.  At work you need to install and update gems hosted on the corporate
+server, but when you take your laptop home and try to work on a side project all your remote gem commands fail.  </p>
+
+<p>So, you end up typing 'gem sources -a' and 'gem sources -r' a lot.</p>
+
+<p>gem-check-sources solves this problem by maintaining two list of gem servers (active and inactive).  If a server is unavailable it gets put on the inactive list and removed from your gem sources.  It will get added back when it becomes available again.</p>
+
+<h3>Installation</h3>
+
+<p>gem install gem-check-sources</p>
+
+<h3>Usage</h3>
+
+<p>gem check_sources</p>
+
+<p>That's it.  If something is inactive and you want to add it back just run the command again.</p>
+
+<h3>Links</h3>
+
+<ul>
+<li>Issue tracking: <a href="http://github.com/britt/gem-check-sources/issues">http://github.com/britt/gem-check-sources/issues</a></li>
+</ul><h3>Note on Patches/Pull Requests</h3>
+
+<ul>
+<li>Fork the project.</li>
+<li>Make your feature addition or bug fix.</li>
+<li>Add tests for it. This is important so I don't break it in a
+future version unintentionally.</li>
+<li>Commit, do not mess with rakefile, version, or history.
+(if you want to have your own version, that is fine but bump version in a commit by itself I can ignore when I pull)</li>
+<li>Send me a pull request. Bonus points for topic branches.</li>
+</ul><h3>Copyright</h3>
+
+<p>Copyright (c) 2009 Britt Crawford. See LICENSE for details.</p>
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">Gem-check-sources maintained by <a href="https://github.com/britt">britt</a></p>
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+    
+
+  </body>
+</html>
